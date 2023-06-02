@@ -1,0 +1,4 @@
+lex java_compiler.l
+yacc -v -d java_compiler.y
+gcc tree.c y.tab.c lex.yy.c
+./a.out < test2.in

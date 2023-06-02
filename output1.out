@@ -1,0 +1,32 @@
+Syntax tree:
+GOAL 
+  MAINCLASS 
+    class 
+    EXPRESSION 
+       
+    { 
+    public 
+    static 
+    void 
+    main 
+    (
+    String 
+    [ 
+    ] 
+    EXPRESSION 
+       
+    )
+    { 
+    STATEMENT 
+      EXPRESSION 
+         
+      = 
+      EXPRESSION 
+        INTEGER_LITERAL 
+           
+        + 
+        INTEGER_LITERAL 
+           
+      ; 
+    } 
+    } 

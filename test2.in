@@ -1,0 +1,76 @@
+class MainClass 
+{
+	public static void main ( String[] args ) 
+	{
+		System.out.println(0);
+	}
+}
+
+class TennisGame
+{  
+	boolean isServe;
+    boolean hasAdvantage;
+    
+    public int playPoint(int player) 
+    { 
+        int score;
+        boolean isWinner;
+        
+        // Perform logic for playing a point
+        
+        return score;
+    }
+	public int playGame(int player1Score, int player2Score, boolean isDeuce) 
+	{ 
+    boolean isAdvantage;
+    int totalScore;
+    int[] scoreArray;
+    Player customPlayer; 
+    
+    scoreArray = new int[5];
+    scoreArray[2] = scoreArray[1] + 1;
+    System.out.println(0);
+    
+    if (player1Score < 0)
+    {
+        isDeuce = false;
+        totalScore = 1;
+
+		while(scoreArray[0] > 0)
+		{
+			isAdvantage = false;
+			customPlayer = new Player ();
+		}
+    }
+    else
+    {
+        totalScore = totalScore + 1;
+        isDeuce = isDeuce && true;
+    }
+    
+    if (isDeuce)
+        totalScore = 1;
+    else
+        totalScore = 2;
+    
+    while (true && false)
+    {
+        totalScore = 2;
+        totalScore = scoreArray.length;
+    }
+    
+    while (totalScore > 10)
+        totalScore = totalScore + 1;
+    
+    return totalScore;
+	}
+	
+	 
+}
+
+class Player extends User
+{  
+	int playerAge;
+	// Insert field declarations here 
+	 
+}

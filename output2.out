@@ -1,0 +1,347 @@
+Syntax tree:
+GOAL 
+  MAINCLASS 
+    class 
+    EXPRESSION 
+       
+    { 
+    public 
+    static 
+    void 
+    main 
+    (
+    String 
+    [ 
+    ] 
+    EXPRESSION 
+       
+    )
+    { 
+    STATEMENT 
+      System.out.println 
+      (
+      INTEGER_LITERAL 
+         
+      )
+      ; 
+    } 
+    } 
+  CLASS_DECLARATIONS 
+    CLASS_DECLARATION_LIST 
+      CLASS_DECLARATION_LIST 
+        CLASS_DECLARATION 
+          class 
+          EXPRESSION 
+             
+          { 
+          VAR_DECLARATIONS 
+            VAR_DECLARATIONS 
+          METHOD_DECLARATIONS 
+            METHOD_DECLARATION_LIST 
+              METHOD_DECLARATION_LIST 
+                METHOD_DECLARATION 
+                  public 
+                  TYPE 
+                    int 
+                  EXPRESSION 
+                     
+                  (
+                  TYPE_IDENTIFIERS 
+                    TYPE_IDENTIFIER_LIST 
+                      TypeIdentifer 
+                        TYPE 
+                          int 
+                        EXPRESSION 
+                           
+                  )
+                  { 
+                  VAR_DECLARATIONS 
+                    VAR_DECLARATIONS 
+                  return 
+                  EXPRESSION 
+                    EXPRESSION 
+                       
+                  ; 
+                  } 
+              METHOD_DECLARATION 
+                public 
+                TYPE 
+                  int 
+                EXPRESSION 
+                   
+                (
+                TYPE_IDENTIFIERS 
+                  TYPE_IDENTIFIER_LIST 
+                    TYPE_IDENTIFIER_LIST 
+                      TYPE_IDENTIFIER_LIST 
+                        TypeIdentifer 
+                          TYPE 
+                            int 
+                          EXPRESSION 
+                             
+                      ,
+                      TypeIdentifer 
+                        TYPE 
+                          int 
+                        EXPRESSION 
+                           
+                    ,
+                    TypeIdentifer 
+                      TYPE 
+                        boolean 
+                      EXPRESSION 
+                         
+                )
+                { 
+                VAR_DECLARATIONS 
+                  VAR_DECLARATIONS 
+                    VAR_DECLARATIONS 
+                      VAR_DECLARATIONS 
+                STATEMENTS 
+                  STATEMENT_LIST 
+                    STATEMENT_LIST 
+                      STATEMENT_LIST 
+                        STATEMENT_LIST 
+                          STATEMENT_LIST 
+                            STATEMENT_LIST 
+                              STATEMENT_LIST 
+                                STATEMENT 
+                                  EXPRESSION 
+                                     
+                                  = 
+                                  EXPRESSION 
+                                    new 
+                                    int 
+                                    [ 
+                                    INTEGER_LITERAL 
+                                       
+                                    ] 
+                                  ; 
+                              STATEMENT 
+                                EXPRESSION 
+                                   
+                                [ 
+                                INTEGER_LITERAL 
+                                   
+                                ] 
+                                = 
+                                EXPRESSION 
+                                  EXPRESSION 
+                                    EXPRESSION 
+                                      EXPRESSION 
+                                         
+                                    [ 
+                                    INTEGER_LITERAL 
+                                       
+                                    ] 
+                                  + 
+                                  INTEGER_LITERAL 
+                                     
+                                ; 
+                            STATEMENT 
+                              System.out.println 
+                              (
+                              INTEGER_LITERAL 
+                                 
+                              )
+                              ; 
+                          STATEMENT 
+                            if 
+                            (
+                            EXPRESSION 
+                              EXPRESSION 
+                                EXPRESSION 
+                                   
+                              < 
+                              INTEGER_LITERAL 
+                                 
+                            )
+                            STATEMENT 
+                              { 
+                              STATEMENTS 
+                                STATEMENT_LIST 
+                                  STATEMENT_LIST 
+                                    STATEMENT_LIST 
+                                      STATEMENT 
+                                        EXPRESSION 
+                                           
+                                        = 
+                                        EXPRESSION 
+                                          false 
+                                        ; 
+                                    STATEMENT 
+                                      EXPRESSION 
+                                         
+                                      = 
+                                      INTEGER_LITERAL 
+                                         
+                                      ; 
+                                  STATEMENT 
+                                    while 
+                                    (
+                                    EXPRESSION 
+                                      EXPRESSION 
+                                        EXPRESSION 
+                                          EXPRESSION 
+                                             
+                                        [ 
+                                        INTEGER_LITERAL 
+                                           
+                                        ] 
+                                      > 
+                                      INTEGER_LITERAL 
+                                         
+                                    )
+                                    STATEMENT 
+                                      { 
+                                      STATEMENTS 
+                                        STATEMENT_LIST 
+                                          STATEMENT_LIST 
+                                            STATEMENT 
+                                              EXPRESSION 
+                                                 
+                                              = 
+                                              EXPRESSION 
+                                                false 
+                                              ; 
+                                          STATEMENT 
+                                            EXPRESSION 
+                                               
+                                            = 
+                                            EXPRESSION 
+                                              new 
+                                              EXPRESSION 
+                                                 
+                                              (
+                                              )
+                                            ; 
+                                      } 
+                              } 
+                            else 
+                            STATEMENT 
+                              { 
+                              STATEMENTS 
+                                STATEMENT_LIST 
+                                  STATEMENT_LIST 
+                                    STATEMENT 
+                                      EXPRESSION 
+                                         
+                                      = 
+                                      EXPRESSION 
+                                        EXPRESSION 
+                                          EXPRESSION 
+                                             
+                                        + 
+                                        INTEGER_LITERAL 
+                                           
+                                      ; 
+                                  STATEMENT 
+                                    EXPRESSION 
+                                       
+                                    = 
+                                    EXPRESSION 
+                                      EXPRESSION 
+                                        EXPRESSION 
+                                           
+                                      $$ 
+                                      EXPRESSION 
+                                        true 
+                                    ; 
+                              } 
+                        STATEMENT 
+                          if 
+                          (
+                          EXPRESSION 
+                            EXPRESSION 
+                               
+                          )
+                          STATEMENT 
+                            EXPRESSION 
+                               
+                            = 
+                            INTEGER_LITERAL 
+                               
+                            ; 
+                          else 
+                          STATEMENT 
+                            EXPRESSION 
+                               
+                            = 
+                            INTEGER_LITERAL 
+                               
+                            ; 
+                      STATEMENT 
+                        while 
+                        (
+                        EXPRESSION 
+                          EXPRESSION 
+                            true 
+                          $$ 
+                          EXPRESSION 
+                            false 
+                        )
+                        STATEMENT 
+                          { 
+                          STATEMENTS 
+                            STATEMENT_LIST 
+                              STATEMENT_LIST 
+                                STATEMENT 
+                                  EXPRESSION 
+                                     
+                                  = 
+                                  INTEGER_LITERAL 
+                                     
+                                  ; 
+                              STATEMENT 
+                                EXPRESSION 
+                                   
+                                = 
+                                EXPRESSION 
+                                  EXPRESSION 
+                                    EXPRESSION 
+                                       
+                                  . 
+                                  length 
+                                ; 
+                          } 
+                    STATEMENT 
+                      while 
+                      (
+                      EXPRESSION 
+                        EXPRESSION 
+                          EXPRESSION 
+                             
+                        > 
+                        INTEGER_LITERAL 
+                           
+                      )
+                      STATEMENT 
+                        EXPRESSION 
+                           
+                        = 
+                        EXPRESSION 
+                          EXPRESSION 
+                            EXPRESSION 
+                               
+                          + 
+                          INTEGER_LITERAL 
+                             
+                        ; 
+                return 
+                EXPRESSION 
+                  EXPRESSION 
+                     
+                ; 
+                } 
+          } 
+      CLASS_DECLARATION 
+        class 
+        EXPRESSION 
+           
+        EXTEND_OPERATION 
+          extends 
+          EXPRESSION 
+             
+        { 
+        VAR_DECLARATIONS 
+        } 

@@ -1,0 +1,1855 @@
+Grammar
+
+    0 $accept: GOAL $end
+
+    1 GOAL: MAINCLASS CLASS_DECLARATIONS
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    3 CLASS_DECLARATION_LIST: CLASS_DECLARATION
+    4                       | CLASS_DECLARATION_LIST CLASS_DECLARATION
+
+    5 CLASS_DECLARATIONS: %empty
+    6                   | CLASS_DECLARATION_LIST
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE
+
+    8 EXTEND_OPERATION: %empty
+    9                 | EXTENDS IDENTIFIER
+
+   10 VAR_DECLARATIONS: %empty
+   11                 | VAR_DECLARATIONS VAR_DECLARATION
+
+   12 VAR_DECLARATION: TYPE IDENTIFIER SEMICOLON
+
+   13 METHOD_DECLARATIONS: %empty
+   14                    | METHOD_DECLARATION_LIST
+
+   15 METHOD_DECLARATION_LIST: METHOD_DECLARATION
+   16                        | METHOD_DECLARATION_LIST METHOD_DECLARATION
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+   18 TYPE_IDENTIFIERS: %empty
+   19                 | TYPE_IDENTIFIER_LIST
+
+   20 TYPE_IDENTIFIER_LIST: TYPE_IDENTIFIER
+   21                     | TYPE_IDENTIFIER_LIST COMMA TYPE_IDENTIFIER
+
+   22 TYPE_IDENTIFIER: TYPE IDENTIFIER
+
+   23 STATEMENTS: %empty
+   24           | STATEMENT_LIST
+
+   25 STATEMENT_LIST: STATEMENT
+   26               | STATEMENT_LIST STATEMENT
+
+   27 TYPE: INTEGER
+   28     | INTEGER LACCESS RACCESS
+   29     | BOOLEAN
+   30     | STRING
+   31     | IDENTIFIER
+
+   32 STATEMENT: LBRACE STATEMENTS RBRACE
+   33          | IF LBRACKET EXPRESSION RBRACKET STATEMENT ELSE STATEMENT
+   34          | WHILE LBRACKET EXPRESSION RBRACKET STATEMENT
+   35          | PRINTLN LBRACKET EXPRESSION RBRACKET SEMICOLON
+   36          | IDENTIFIER '=' EXPRESSION SEMICOLON
+   37          | IDENTIFIER LACCESS EXPRESSION RACCESS '=' EXPRESSION SEMICOLON
+
+   38 EXPRESSIONS: %empty
+   39            | EXPRESSION_LIST
+
+   40 EXPRESSION_LIST: EXPRESSION
+   41                | EXPRESSION_LIST COMMA EXPRESSION
+
+   42 EXPRESSION: EXPRESSION AND EXPRESSION
+   43           | EXPRESSION '<' EXPRESSION
+   44           | EXPRESSION '>' EXPRESSION
+   45           | EXPRESSION '+' EXPRESSION
+   46           | EXPRESSION '-' EXPRESSION
+   47           | EXPRESSION '*' EXPRESSION
+   48           | EXPRESSION LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION '.' LENGTH
+   50           | EXPRESSION '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+   51           | TRUE
+   52           | FALSE
+   53           | IDENTIFIER
+   54           | THIS
+   55           | NEW INTEGER LACCESS EXPRESSION RACCESS
+   56           | NEW IDENTIFIER LBRACKET RBRACKET
+   57           | '!' EXPRESSION
+   58           | LBRACKET EXPRESSION RBRACKET
+   59           | INTEGER_LITERAL
+
+   60 IDENTIFIER: ID
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '!' (33) 57
+    '*' (42) 47
+    '+' (43) 45
+    '-' (45) 46
+    '.' (46) 49 50
+    '<' (60) 43
+    '=' (61) 36 37
+    '>' (62) 44
+    error (256)
+    CLASS <node> (258) 2 7
+    PUBLIC <node> (259) 2 17
+    STATIC <node> (260) 2
+    VOID <node> (261) 2
+    MAIN <node> (262) 2
+    IF <node> (263) 33
+    ELSE <node> (264) 33
+    WHILE <node> (265) 34
+    EXTENDS <node> (266) 9
+    INTEGER <node> (267) 27 28 55
+    BOOLEAN <node> (268) 29
+    STRING <node> (269) 2 30
+    TRUE <node> (270) 51
+    FALSE <node> (271) 52
+    ID <node> (272) 60
+    INTEGER_LITERAL <node> (273) 59
+    AND <node> (274) 42
+    THIS <node> (275) 54
+    NEW <node> (276) 55 56
+    PRINTLN <node> (277) 35
+    LENGTH <node> (278) 49
+    RETURN <node> (279) 17
+    RBRACE <node> (280) 2 7 17 32
+    RACCESS <node> (281) 2 28 37 48 55
+    LBRACKET <node> (282) 2 17 33 34 35 50 56 58
+    RBRACKET <node> (283) 2 17 33 34 35 50 56 58
+    SEMICOLON <node> (284) 12 17 35 36 37
+    COMMA <node> (285) 21 41
+    LACCESS (286) 2 28 37 48 55
+    LBRACE (287) 2 7 17 32
+
+
+Nonterminals, with rules where they appear
+
+    $accept (41)
+        on left: 0
+    GOAL <node> (42)
+        on left: 1
+        on right: 0
+    MAINCLASS <node> (43)
+        on left: 2
+        on right: 1
+    CLASS_DECLARATION_LIST <node> (44)
+        on left: 3 4
+        on right: 4 6
+    CLASS_DECLARATIONS <node> (45)
+        on left: 5 6
+        on right: 1
+    CLASS_DECLARATION <node> (46)
+        on left: 7
+        on right: 3 4
+    EXTEND_OPERATION <node> (47)
+        on left: 8 9
+        on right: 7
+    VAR_DECLARATIONS <node> (48)
+        on left: 10 11
+        on right: 7 11 17
+    VAR_DECLARATION <node> (49)
+        on left: 12
+        on right: 11
+    METHOD_DECLARATIONS <node> (50)
+        on left: 13 14
+        on right: 7
+    METHOD_DECLARATION_LIST <node> (51)
+        on left: 15 16
+        on right: 14 16
+    METHOD_DECLARATION <node> (52)
+        on left: 17
+        on right: 15 16
+    TYPE_IDENTIFIERS <node> (53)
+        on left: 18 19
+        on right: 17
+    TYPE_IDENTIFIER_LIST <node> (54)
+        on left: 20 21
+        on right: 19 21
+    TYPE_IDENTIFIER <node> (55)
+        on left: 22
+        on right: 20 21
+    STATEMENTS <node> (56)
+        on left: 23 24
+        on right: 17 32
+    STATEMENT_LIST <node> (57)
+        on left: 25 26
+        on right: 24 26
+    TYPE <node> (58)
+        on left: 27 28 29 30 31
+        on right: 12 17 22
+    STATEMENT <node> (59)
+        on left: 32 33 34 35 36 37
+        on right: 2 25 26 33 34
+    EXPRESSIONS <node> (60)
+        on left: 38 39
+        on right: 50
+    EXPRESSION_LIST <node> (61)
+        on left: 40 41
+        on right: 39 41
+    EXPRESSION <node> (62)
+        on left: 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59
+        on right: 17 33 34 35 36 37 40 41 42 43 44 45 46 47 48 49 50 55 57 58
+    IDENTIFIER <node> (63)
+        on left: 60
+        on right: 2 7 9 12 17 22 31 36 37 50 53 56
+
+
+State 0
+
+    0 $accept: . GOAL $end
+
+    CLASS  shift, and go to state 1
+
+    GOAL       go to state 2
+    MAINCLASS  go to state 3
+
+
+State 1
+
+    2 MAINCLASS: CLASS . IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 5
+
+
+State 2
+
+    0 $accept: GOAL . $end
+
+    $end  shift, and go to state 6
+
+
+State 3
+
+    1 GOAL: MAINCLASS . CLASS_DECLARATIONS
+
+    CLASS  shift, and go to state 7
+
+    $default  reduce using rule 5 (CLASS_DECLARATIONS)
+
+    CLASS_DECLARATION_LIST  go to state 8
+    CLASS_DECLARATIONS      go to state 9
+    CLASS_DECLARATION       go to state 10
+
+
+State 4
+
+   60 IDENTIFIER: ID .
+
+    $default  reduce using rule 60 (IDENTIFIER)
+
+
+State 5
+
+    2 MAINCLASS: CLASS IDENTIFIER . LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    LBRACE  shift, and go to state 11
+
+
+State 6
+
+    0 $accept: GOAL $end .
+
+    $default  accept
+
+
+State 7
+
+    7 CLASS_DECLARATION: CLASS . IDENTIFIER EXTEND_OPERATION LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 12
+
+
+State 8
+
+    4 CLASS_DECLARATION_LIST: CLASS_DECLARATION_LIST . CLASS_DECLARATION
+    6 CLASS_DECLARATIONS: CLASS_DECLARATION_LIST .
+
+    CLASS  shift, and go to state 7
+
+    $default  reduce using rule 6 (CLASS_DECLARATIONS)
+
+    CLASS_DECLARATION  go to state 13
+
+
+State 9
+
+    1 GOAL: MAINCLASS CLASS_DECLARATIONS .
+
+    $default  reduce using rule 1 (GOAL)
+
+
+State 10
+
+    3 CLASS_DECLARATION_LIST: CLASS_DECLARATION .
+
+    $default  reduce using rule 3 (CLASS_DECLARATION_LIST)
+
+
+State 11
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE . PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    PUBLIC  shift, and go to state 14
+
+
+State 12
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER . EXTEND_OPERATION LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE
+
+    EXTENDS  shift, and go to state 15
+
+    $default  reduce using rule 8 (EXTEND_OPERATION)
+
+    EXTEND_OPERATION  go to state 16
+
+
+State 13
+
+    4 CLASS_DECLARATION_LIST: CLASS_DECLARATION_LIST CLASS_DECLARATION .
+
+    $default  reduce using rule 4 (CLASS_DECLARATION_LIST)
+
+
+State 14
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC . STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    STATIC  shift, and go to state 17
+
+
+State 15
+
+    9 EXTEND_OPERATION: EXTENDS . IDENTIFIER
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 18
+
+
+State 16
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION . LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE
+
+    LBRACE  shift, and go to state 19
+
+
+State 17
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC . VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    VOID  shift, and go to state 20
+
+
+State 18
+
+    9 EXTEND_OPERATION: EXTENDS IDENTIFIER .
+
+    $default  reduce using rule 9 (EXTEND_OPERATION)
+
+
+State 19
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION LBRACE . VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE
+
+    $default  reduce using rule 10 (VAR_DECLARATIONS)
+
+    VAR_DECLARATIONS  go to state 21
+
+
+State 20
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID . MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    MAIN  shift, and go to state 22
+
+
+State 21
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION LBRACE VAR_DECLARATIONS . METHOD_DECLARATIONS RBRACE
+   11 VAR_DECLARATIONS: VAR_DECLARATIONS . VAR_DECLARATION
+
+    PUBLIC   shift, and go to state 23
+    INTEGER  shift, and go to state 24
+    BOOLEAN  shift, and go to state 25
+    STRING   shift, and go to state 26
+    ID       shift, and go to state 4
+
+    $default  reduce using rule 13 (METHOD_DECLARATIONS)
+
+    VAR_DECLARATION          go to state 27
+    METHOD_DECLARATIONS      go to state 28
+    METHOD_DECLARATION_LIST  go to state 29
+    METHOD_DECLARATION       go to state 30
+    TYPE                     go to state 31
+    IDENTIFIER               go to state 32
+
+
+State 22
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN . LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    LBRACKET  shift, and go to state 33
+
+
+State 23
+
+   17 METHOD_DECLARATION: PUBLIC . TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    INTEGER  shift, and go to state 24
+    BOOLEAN  shift, and go to state 25
+    STRING   shift, and go to state 26
+    ID       shift, and go to state 4
+
+    TYPE        go to state 34
+    IDENTIFIER  go to state 32
+
+
+State 24
+
+   27 TYPE: INTEGER .
+   28     | INTEGER . LACCESS RACCESS
+
+    LACCESS  shift, and go to state 35
+
+    $default  reduce using rule 27 (TYPE)
+
+
+State 25
+
+   29 TYPE: BOOLEAN .
+
+    $default  reduce using rule 29 (TYPE)
+
+
+State 26
+
+   30 TYPE: STRING .
+
+    $default  reduce using rule 30 (TYPE)
+
+
+State 27
+
+   11 VAR_DECLARATIONS: VAR_DECLARATIONS VAR_DECLARATION .
+
+    $default  reduce using rule 11 (VAR_DECLARATIONS)
+
+
+State 28
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS . RBRACE
+
+    RBRACE  shift, and go to state 36
+
+
+State 29
+
+   14 METHOD_DECLARATIONS: METHOD_DECLARATION_LIST .
+   16 METHOD_DECLARATION_LIST: METHOD_DECLARATION_LIST . METHOD_DECLARATION
+
+    PUBLIC  shift, and go to state 23
+
+    $default  reduce using rule 14 (METHOD_DECLARATIONS)
+
+    METHOD_DECLARATION  go to state 37
+
+
+State 30
+
+   15 METHOD_DECLARATION_LIST: METHOD_DECLARATION .
+
+    $default  reduce using rule 15 (METHOD_DECLARATION_LIST)
+
+
+State 31
+
+   12 VAR_DECLARATION: TYPE . IDENTIFIER SEMICOLON
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 38
+
+
+State 32
+
+   31 TYPE: IDENTIFIER .
+
+    $default  reduce using rule 31 (TYPE)
+
+
+State 33
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET . STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    STRING  shift, and go to state 39
+
+
+State 34
+
+   17 METHOD_DECLARATION: PUBLIC TYPE . IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 40
+
+
+State 35
+
+   28 TYPE: INTEGER LACCESS . RACCESS
+
+    RACCESS  shift, and go to state 41
+
+
+State 36
+
+    7 CLASS_DECLARATION: CLASS IDENTIFIER EXTEND_OPERATION LBRACE VAR_DECLARATIONS METHOD_DECLARATIONS RBRACE .
+
+    $default  reduce using rule 7 (CLASS_DECLARATION)
+
+
+State 37
+
+   16 METHOD_DECLARATION_LIST: METHOD_DECLARATION_LIST METHOD_DECLARATION .
+
+    $default  reduce using rule 16 (METHOD_DECLARATION_LIST)
+
+
+State 38
+
+   12 VAR_DECLARATION: TYPE IDENTIFIER . SEMICOLON
+
+    SEMICOLON  shift, and go to state 42
+
+
+State 39
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING . LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    LACCESS  shift, and go to state 43
+
+
+State 40
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER . LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    LBRACKET  shift, and go to state 44
+
+
+State 41
+
+   28 TYPE: INTEGER LACCESS RACCESS .
+
+    $default  reduce using rule 28 (TYPE)
+
+
+State 42
+
+   12 VAR_DECLARATION: TYPE IDENTIFIER SEMICOLON .
+
+    $default  reduce using rule 12 (VAR_DECLARATION)
+
+
+State 43
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS . RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    RACCESS  shift, and go to state 45
+
+
+State 44
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET . TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    INTEGER  shift, and go to state 24
+    BOOLEAN  shift, and go to state 25
+    STRING   shift, and go to state 26
+    ID       shift, and go to state 4
+
+    $default  reduce using rule 18 (TYPE_IDENTIFIERS)
+
+    TYPE_IDENTIFIERS      go to state 46
+    TYPE_IDENTIFIER_LIST  go to state 47
+    TYPE_IDENTIFIER       go to state 48
+    TYPE                  go to state 49
+    IDENTIFIER            go to state 32
+
+
+State 45
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS . IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 50
+
+
+State 46
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS . RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    RBRACKET  shift, and go to state 51
+
+
+State 47
+
+   19 TYPE_IDENTIFIERS: TYPE_IDENTIFIER_LIST .
+   21 TYPE_IDENTIFIER_LIST: TYPE_IDENTIFIER_LIST . COMMA TYPE_IDENTIFIER
+
+    COMMA  shift, and go to state 52
+
+    $default  reduce using rule 19 (TYPE_IDENTIFIERS)
+
+
+State 48
+
+   20 TYPE_IDENTIFIER_LIST: TYPE_IDENTIFIER .
+
+    $default  reduce using rule 20 (TYPE_IDENTIFIER_LIST)
+
+
+State 49
+
+   22 TYPE_IDENTIFIER: TYPE . IDENTIFIER
+
+    ID  shift, and go to state 4
+
+    IDENTIFIER  go to state 53
+
+
+State 50
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER . RBRACKET LBRACE STATEMENT RBRACE RBRACE
+
+    RBRACKET  shift, and go to state 54
+
+
+State 51
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET . LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    LBRACE  shift, and go to state 55
+
+
+State 52
+
+   21 TYPE_IDENTIFIER_LIST: TYPE_IDENTIFIER_LIST COMMA . TYPE_IDENTIFIER
+
+    INTEGER  shift, and go to state 24
+    BOOLEAN  shift, and go to state 25
+    STRING   shift, and go to state 26
+    ID       shift, and go to state 4
+
+    TYPE_IDENTIFIER  go to state 56
+    TYPE             go to state 49
+    IDENTIFIER       go to state 32
+
+
+State 53
+
+   22 TYPE_IDENTIFIER: TYPE IDENTIFIER .
+
+    $default  reduce using rule 22 (TYPE_IDENTIFIER)
+
+
+State 54
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET . LBRACE STATEMENT RBRACE RBRACE
+
+    LBRACE  shift, and go to state 57
+
+
+State 55
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE . VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    $default  reduce using rule 10 (VAR_DECLARATIONS)
+
+    VAR_DECLARATIONS  go to state 58
+
+
+State 56
+
+   21 TYPE_IDENTIFIER_LIST: TYPE_IDENTIFIER_LIST COMMA TYPE_IDENTIFIER .
+
+    $default  reduce using rule 21 (TYPE_IDENTIFIER_LIST)
+
+
+State 57
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE . STATEMENT RBRACE RBRACE
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    STATEMENT   go to state 63
+    IDENTIFIER  go to state 64
+
+
+State 58
+
+   11 VAR_DECLARATIONS: VAR_DECLARATIONS . VAR_DECLARATION
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS . STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    INTEGER  shift, and go to state 24
+    BOOLEAN  shift, and go to state 25
+    STRING   shift, and go to state 26
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    $default  reduce using rule 23 (STATEMENTS)
+
+    VAR_DECLARATION  go to state 27
+    STATEMENTS       go to state 65
+    STATEMENT_LIST   go to state 66
+    TYPE             go to state 31
+    STATEMENT        go to state 67
+    IDENTIFIER       go to state 68
+
+
+State 59
+
+   33 STATEMENT: IF . LBRACKET EXPRESSION RBRACKET STATEMENT ELSE STATEMENT
+
+    LBRACKET  shift, and go to state 69
+
+
+State 60
+
+   34 STATEMENT: WHILE . LBRACKET EXPRESSION RBRACKET STATEMENT
+
+    LBRACKET  shift, and go to state 70
+
+
+State 61
+
+   35 STATEMENT: PRINTLN . LBRACKET EXPRESSION RBRACKET SEMICOLON
+
+    LBRACKET  shift, and go to state 71
+
+
+State 62
+
+   32 STATEMENT: LBRACE . STATEMENTS RBRACE
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    $default  reduce using rule 23 (STATEMENTS)
+
+    STATEMENTS      go to state 72
+    STATEMENT_LIST  go to state 66
+    STATEMENT       go to state 67
+    IDENTIFIER      go to state 64
+
+
+State 63
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT . RBRACE RBRACE
+
+    RBRACE  shift, and go to state 73
+
+
+State 64
+
+   36 STATEMENT: IDENTIFIER . '=' EXPRESSION SEMICOLON
+   37          | IDENTIFIER . LACCESS EXPRESSION RACCESS '=' EXPRESSION SEMICOLON
+
+    LACCESS  shift, and go to state 74
+    '='      shift, and go to state 75
+
+
+State 65
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS . RETURN EXPRESSION SEMICOLON RBRACE
+
+    RETURN  shift, and go to state 76
+
+
+State 66
+
+   24 STATEMENTS: STATEMENT_LIST .
+   26 STATEMENT_LIST: STATEMENT_LIST . STATEMENT
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    $default  reduce using rule 24 (STATEMENTS)
+
+    STATEMENT   go to state 77
+    IDENTIFIER  go to state 64
+
+
+State 67
+
+   25 STATEMENT_LIST: STATEMENT .
+
+    $default  reduce using rule 25 (STATEMENT_LIST)
+
+
+State 68
+
+   31 TYPE: IDENTIFIER .
+   36 STATEMENT: IDENTIFIER . '=' EXPRESSION SEMICOLON
+   37          | IDENTIFIER . LACCESS EXPRESSION RACCESS '=' EXPRESSION SEMICOLON
+
+    LACCESS  shift, and go to state 74
+    '='      shift, and go to state 75
+
+    $default  reduce using rule 31 (TYPE)
+
+
+State 69
+
+   33 STATEMENT: IF LBRACKET . EXPRESSION RBRACKET STATEMENT ELSE STATEMENT
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 85
+    IDENTIFIER  go to state 86
+
+
+State 70
+
+   34 STATEMENT: WHILE LBRACKET . EXPRESSION RBRACKET STATEMENT
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 87
+    IDENTIFIER  go to state 86
+
+
+State 71
+
+   35 STATEMENT: PRINTLN LBRACKET . EXPRESSION RBRACKET SEMICOLON
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 88
+    IDENTIFIER  go to state 86
+
+
+State 72
+
+   32 STATEMENT: LBRACE STATEMENTS . RBRACE
+
+    RBRACE  shift, and go to state 89
+
+
+State 73
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE . RBRACE
+
+    RBRACE  shift, and go to state 90
+
+
+State 74
+
+   37 STATEMENT: IDENTIFIER LACCESS . EXPRESSION RACCESS '=' EXPRESSION SEMICOLON
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 91
+    IDENTIFIER  go to state 86
+
+
+State 75
+
+   36 STATEMENT: IDENTIFIER '=' . EXPRESSION SEMICOLON
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 92
+    IDENTIFIER  go to state 86
+
+
+State 76
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN . EXPRESSION SEMICOLON RBRACE
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 93
+    IDENTIFIER  go to state 86
+
+
+State 77
+
+   26 STATEMENT_LIST: STATEMENT_LIST STATEMENT .
+
+    $default  reduce using rule 26 (STATEMENT_LIST)
+
+
+State 78
+
+   51 EXPRESSION: TRUE .
+
+    $default  reduce using rule 51 (EXPRESSION)
+
+
+State 79
+
+   52 EXPRESSION: FALSE .
+
+    $default  reduce using rule 52 (EXPRESSION)
+
+
+State 80
+
+   59 EXPRESSION: INTEGER_LITERAL .
+
+    $default  reduce using rule 59 (EXPRESSION)
+
+
+State 81
+
+   54 EXPRESSION: THIS .
+
+    $default  reduce using rule 54 (EXPRESSION)
+
+
+State 82
+
+   55 EXPRESSION: NEW . INTEGER LACCESS EXPRESSION RACCESS
+   56           | NEW . IDENTIFIER LBRACKET RBRACKET
+
+    INTEGER  shift, and go to state 94
+    ID       shift, and go to state 4
+
+    IDENTIFIER  go to state 95
+
+
+State 83
+
+   58 EXPRESSION: LBRACKET . EXPRESSION RBRACKET
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 96
+    IDENTIFIER  go to state 86
+
+
+State 84
+
+   57 EXPRESSION: '!' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 97
+    IDENTIFIER  go to state 86
+
+
+State 85
+
+   33 STATEMENT: IF LBRACKET EXPRESSION . RBRACKET STATEMENT ELSE STATEMENT
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND       shift, and go to state 98
+    RBRACKET  shift, and go to state 99
+    LACCESS   shift, and go to state 100
+    '.'       shift, and go to state 101
+    '*'       shift, and go to state 102
+    '+'       shift, and go to state 103
+    '-'       shift, and go to state 104
+    '<'       shift, and go to state 105
+    '>'       shift, and go to state 106
+
+
+State 86
+
+   53 EXPRESSION: IDENTIFIER .
+
+    $default  reduce using rule 53 (EXPRESSION)
+
+
+State 87
+
+   34 STATEMENT: WHILE LBRACKET EXPRESSION . RBRACKET STATEMENT
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND       shift, and go to state 98
+    RBRACKET  shift, and go to state 107
+    LACCESS   shift, and go to state 100
+    '.'       shift, and go to state 101
+    '*'       shift, and go to state 102
+    '+'       shift, and go to state 103
+    '-'       shift, and go to state 104
+    '<'       shift, and go to state 105
+    '>'       shift, and go to state 106
+
+
+State 88
+
+   35 STATEMENT: PRINTLN LBRACKET EXPRESSION . RBRACKET SEMICOLON
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND       shift, and go to state 98
+    RBRACKET  shift, and go to state 108
+    LACCESS   shift, and go to state 100
+    '.'       shift, and go to state 101
+    '*'       shift, and go to state 102
+    '+'       shift, and go to state 103
+    '-'       shift, and go to state 104
+    '<'       shift, and go to state 105
+    '>'       shift, and go to state 106
+
+
+State 89
+
+   32 STATEMENT: LBRACE STATEMENTS RBRACE .
+
+    $default  reduce using rule 32 (STATEMENT)
+
+
+State 90
+
+    2 MAINCLASS: CLASS IDENTIFIER LBRACE PUBLIC STATIC VOID MAIN LBRACKET STRING LACCESS RACCESS IDENTIFIER RBRACKET LBRACE STATEMENT RBRACE RBRACE .
+
+    $default  reduce using rule 2 (MAINCLASS)
+
+
+State 91
+
+   37 STATEMENT: IDENTIFIER LACCESS EXPRESSION . RACCESS '=' EXPRESSION SEMICOLON
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND      shift, and go to state 98
+    RACCESS  shift, and go to state 109
+    LACCESS  shift, and go to state 100
+    '.'      shift, and go to state 101
+    '*'      shift, and go to state 102
+    '+'      shift, and go to state 103
+    '-'      shift, and go to state 104
+    '<'      shift, and go to state 105
+    '>'      shift, and go to state 106
+
+
+State 92
+
+   36 STATEMENT: IDENTIFIER '=' EXPRESSION . SEMICOLON
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND        shift, and go to state 98
+    SEMICOLON  shift, and go to state 110
+    LACCESS    shift, and go to state 100
+    '.'        shift, and go to state 101
+    '*'        shift, and go to state 102
+    '+'        shift, and go to state 103
+    '-'        shift, and go to state 104
+    '<'        shift, and go to state 105
+    '>'        shift, and go to state 106
+
+
+State 93
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION . SEMICOLON RBRACE
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND        shift, and go to state 98
+    SEMICOLON  shift, and go to state 111
+    LACCESS    shift, and go to state 100
+    '.'        shift, and go to state 101
+    '*'        shift, and go to state 102
+    '+'        shift, and go to state 103
+    '-'        shift, and go to state 104
+    '<'        shift, and go to state 105
+    '>'        shift, and go to state 106
+
+
+State 94
+
+   55 EXPRESSION: NEW INTEGER . LACCESS EXPRESSION RACCESS
+
+    LACCESS  shift, and go to state 112
+
+
+State 95
+
+   56 EXPRESSION: NEW IDENTIFIER . LBRACKET RBRACKET
+
+    LBRACKET  shift, and go to state 113
+
+
+State 96
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+   58           | LBRACKET EXPRESSION . RBRACKET
+
+    AND       shift, and go to state 98
+    RBRACKET  shift, and go to state 114
+    LACCESS   shift, and go to state 100
+    '.'       shift, and go to state 101
+    '*'       shift, and go to state 102
+    '+'       shift, and go to state 103
+    '-'       shift, and go to state 104
+    '<'       shift, and go to state 105
+    '>'       shift, and go to state 106
+
+
+State 97
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+   57           | '!' EXPRESSION .
+
+    $default  reduce using rule 57 (EXPRESSION)
+
+
+State 98
+
+   42 EXPRESSION: EXPRESSION AND . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 115
+    IDENTIFIER  go to state 86
+
+
+State 99
+
+   33 STATEMENT: IF LBRACKET EXPRESSION RBRACKET . STATEMENT ELSE STATEMENT
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    STATEMENT   go to state 116
+    IDENTIFIER  go to state 64
+
+
+State 100
+
+   48 EXPRESSION: EXPRESSION LACCESS . EXPRESSION RACCESS
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 117
+    IDENTIFIER  go to state 86
+
+
+State 101
+
+   49 EXPRESSION: EXPRESSION '.' . LENGTH
+   50           | EXPRESSION '.' . IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    ID      shift, and go to state 4
+    LENGTH  shift, and go to state 118
+
+    IDENTIFIER  go to state 119
+
+
+State 102
+
+   47 EXPRESSION: EXPRESSION '*' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 120
+    IDENTIFIER  go to state 86
+
+
+State 103
+
+   45 EXPRESSION: EXPRESSION '+' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 121
+    IDENTIFIER  go to state 86
+
+
+State 104
+
+   46 EXPRESSION: EXPRESSION '-' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 122
+    IDENTIFIER  go to state 86
+
+
+State 105
+
+   43 EXPRESSION: EXPRESSION '<' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 123
+    IDENTIFIER  go to state 86
+
+
+State 106
+
+   44 EXPRESSION: EXPRESSION '>' . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 124
+    IDENTIFIER  go to state 86
+
+
+State 107
+
+   34 STATEMENT: WHILE LBRACKET EXPRESSION RBRACKET . STATEMENT
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    STATEMENT   go to state 125
+    IDENTIFIER  go to state 64
+
+
+State 108
+
+   35 STATEMENT: PRINTLN LBRACKET EXPRESSION RBRACKET . SEMICOLON
+
+    SEMICOLON  shift, and go to state 126
+
+
+State 109
+
+   37 STATEMENT: IDENTIFIER LACCESS EXPRESSION RACCESS . '=' EXPRESSION SEMICOLON
+
+    '='  shift, and go to state 127
+
+
+State 110
+
+   36 STATEMENT: IDENTIFIER '=' EXPRESSION SEMICOLON .
+
+    $default  reduce using rule 36 (STATEMENT)
+
+
+State 111
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON . RBRACE
+
+    RBRACE  shift, and go to state 128
+
+
+State 112
+
+   55 EXPRESSION: NEW INTEGER LACCESS . EXPRESSION RACCESS
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 129
+    IDENTIFIER  go to state 86
+
+
+State 113
+
+   56 EXPRESSION: NEW IDENTIFIER LBRACKET . RBRACKET
+
+    RBRACKET  shift, and go to state 130
+
+
+State 114
+
+   58 EXPRESSION: LBRACKET EXPRESSION RBRACKET .
+
+    $default  reduce using rule 58 (EXPRESSION)
+
+
+State 115
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   42           | EXPRESSION AND EXPRESSION .
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    $default  reduce using rule 42 (EXPRESSION)
+
+
+State 116
+
+   33 STATEMENT: IF LBRACKET EXPRESSION RBRACKET STATEMENT . ELSE STATEMENT
+
+    ELSE  shift, and go to state 131
+
+
+State 117
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   48           | EXPRESSION LACCESS EXPRESSION . RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND      shift, and go to state 98
+    RACCESS  shift, and go to state 132
+    LACCESS  shift, and go to state 100
+    '.'      shift, and go to state 101
+    '*'      shift, and go to state 102
+    '+'      shift, and go to state 103
+    '-'      shift, and go to state 104
+    '<'      shift, and go to state 105
+    '>'      shift, and go to state 106
+
+
+State 118
+
+   49 EXPRESSION: EXPRESSION '.' LENGTH .
+
+    $default  reduce using rule 49 (EXPRESSION)
+
+
+State 119
+
+   50 EXPRESSION: EXPRESSION '.' IDENTIFIER . LBRACKET EXPRESSIONS RBRACKET
+
+    LBRACKET  shift, and go to state 133
+
+
+State 120
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   47           | EXPRESSION '*' EXPRESSION .
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND  shift, and go to state 98
+    '+'  shift, and go to state 103
+    '-'  shift, and go to state 104
+    '<'  shift, and go to state 105
+    '>'  shift, and go to state 106
+
+    $default  reduce using rule 47 (EXPRESSION)
+
+
+State 121
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   45           | EXPRESSION '+' EXPRESSION .
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND  shift, and go to state 98
+    '<'  shift, and go to state 105
+    '>'  shift, and go to state 106
+
+    $default  reduce using rule 45 (EXPRESSION)
+
+
+State 122
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   46           | EXPRESSION '-' EXPRESSION .
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND  shift, and go to state 98
+    '<'  shift, and go to state 105
+    '>'  shift, and go to state 106
+
+    $default  reduce using rule 46 (EXPRESSION)
+
+
+State 123
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   43           | EXPRESSION '<' EXPRESSION .
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    $default  reduce using rule 43 (EXPRESSION)
+
+
+State 124
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   44           | EXPRESSION '>' EXPRESSION .
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    $default  reduce using rule 44 (EXPRESSION)
+
+
+State 125
+
+   34 STATEMENT: WHILE LBRACKET EXPRESSION RBRACKET STATEMENT .
+
+    $default  reduce using rule 34 (STATEMENT)
+
+
+State 126
+
+   35 STATEMENT: PRINTLN LBRACKET EXPRESSION RBRACKET SEMICOLON .
+
+    $default  reduce using rule 35 (STATEMENT)
+
+
+State 127
+
+   37 STATEMENT: IDENTIFIER LACCESS EXPRESSION RACCESS '=' . EXPRESSION SEMICOLON
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 134
+    IDENTIFIER  go to state 86
+
+
+State 128
+
+   17 METHOD_DECLARATION: PUBLIC TYPE IDENTIFIER LBRACKET TYPE_IDENTIFIERS RBRACKET LBRACE VAR_DECLARATIONS STATEMENTS RETURN EXPRESSION SEMICOLON RBRACE .
+
+    $default  reduce using rule 17 (METHOD_DECLARATION)
+
+
+State 129
+
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+   55           | NEW INTEGER LACCESS EXPRESSION . RACCESS
+
+    AND      shift, and go to state 98
+    RACCESS  shift, and go to state 135
+    LACCESS  shift, and go to state 100
+    '.'      shift, and go to state 101
+    '*'      shift, and go to state 102
+    '+'      shift, and go to state 103
+    '-'      shift, and go to state 104
+    '<'      shift, and go to state 105
+    '>'      shift, and go to state 106
+
+
+State 130
+
+   56 EXPRESSION: NEW IDENTIFIER LBRACKET RBRACKET .
+
+    $default  reduce using rule 56 (EXPRESSION)
+
+
+State 131
+
+   33 STATEMENT: IF LBRACKET EXPRESSION RBRACKET STATEMENT ELSE . STATEMENT
+
+    IF       shift, and go to state 59
+    WHILE    shift, and go to state 60
+    ID       shift, and go to state 4
+    PRINTLN  shift, and go to state 61
+    LBRACE   shift, and go to state 62
+
+    STATEMENT   go to state 136
+    IDENTIFIER  go to state 64
+
+
+State 132
+
+   48 EXPRESSION: EXPRESSION LACCESS EXPRESSION RACCESS .
+
+    $default  reduce using rule 48 (EXPRESSION)
+
+
+State 133
+
+   50 EXPRESSION: EXPRESSION '.' IDENTIFIER LBRACKET . EXPRESSIONS RBRACKET
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    $default  reduce using rule 38 (EXPRESSIONS)
+
+    EXPRESSIONS      go to state 137
+    EXPRESSION_LIST  go to state 138
+    EXPRESSION       go to state 139
+    IDENTIFIER       go to state 86
+
+
+State 134
+
+   37 STATEMENT: IDENTIFIER LACCESS EXPRESSION RACCESS '=' EXPRESSION . SEMICOLON
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND        shift, and go to state 98
+    SEMICOLON  shift, and go to state 140
+    LACCESS    shift, and go to state 100
+    '.'        shift, and go to state 101
+    '*'        shift, and go to state 102
+    '+'        shift, and go to state 103
+    '-'        shift, and go to state 104
+    '<'        shift, and go to state 105
+    '>'        shift, and go to state 106
+
+
+State 135
+
+   55 EXPRESSION: NEW INTEGER LACCESS EXPRESSION RACCESS .
+
+    $default  reduce using rule 55 (EXPRESSION)
+
+
+State 136
+
+   33 STATEMENT: IF LBRACKET EXPRESSION RBRACKET STATEMENT ELSE STATEMENT .
+
+    $default  reduce using rule 33 (STATEMENT)
+
+
+State 137
+
+   50 EXPRESSION: EXPRESSION '.' IDENTIFIER LBRACKET EXPRESSIONS . RBRACKET
+
+    RBRACKET  shift, and go to state 141
+
+
+State 138
+
+   39 EXPRESSIONS: EXPRESSION_LIST .
+   41 EXPRESSION_LIST: EXPRESSION_LIST . COMMA EXPRESSION
+
+    COMMA  shift, and go to state 142
+
+    $default  reduce using rule 39 (EXPRESSIONS)
+
+
+State 139
+
+   40 EXPRESSION_LIST: EXPRESSION .
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND      shift, and go to state 98
+    LACCESS  shift, and go to state 100
+    '.'      shift, and go to state 101
+    '*'      shift, and go to state 102
+    '+'      shift, and go to state 103
+    '-'      shift, and go to state 104
+    '<'      shift, and go to state 105
+    '>'      shift, and go to state 106
+
+    $default  reduce using rule 40 (EXPRESSION_LIST)
+
+
+State 140
+
+   37 STATEMENT: IDENTIFIER LACCESS EXPRESSION RACCESS '=' EXPRESSION SEMICOLON .
+
+    $default  reduce using rule 37 (STATEMENT)
+
+
+State 141
+
+   50 EXPRESSION: EXPRESSION '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET .
+
+    $default  reduce using rule 50 (EXPRESSION)
+
+
+State 142
+
+   41 EXPRESSION_LIST: EXPRESSION_LIST COMMA . EXPRESSION
+
+    TRUE             shift, and go to state 78
+    FALSE            shift, and go to state 79
+    ID               shift, and go to state 4
+    INTEGER_LITERAL  shift, and go to state 80
+    THIS             shift, and go to state 81
+    NEW              shift, and go to state 82
+    LBRACKET         shift, and go to state 83
+    '!'              shift, and go to state 84
+
+    EXPRESSION  go to state 143
+    IDENTIFIER  go to state 86
+
+
+State 143
+
+   41 EXPRESSION_LIST: EXPRESSION_LIST COMMA EXPRESSION .
+   42 EXPRESSION: EXPRESSION . AND EXPRESSION
+   43           | EXPRESSION . '<' EXPRESSION
+   44           | EXPRESSION . '>' EXPRESSION
+   45           | EXPRESSION . '+' EXPRESSION
+   46           | EXPRESSION . '-' EXPRESSION
+   47           | EXPRESSION . '*' EXPRESSION
+   48           | EXPRESSION . LACCESS EXPRESSION RACCESS
+   49           | EXPRESSION . '.' LENGTH
+   50           | EXPRESSION . '.' IDENTIFIER LBRACKET EXPRESSIONS RBRACKET
+
+    AND      shift, and go to state 98
+    LACCESS  shift, and go to state 100
+    '.'      shift, and go to state 101
+    '*'      shift, and go to state 102
+    '+'      shift, and go to state 103
+    '-'      shift, and go to state 104
+    '<'      shift, and go to state 105
+    '>'      shift, and go to state 106
+
+    $default  reduce using rule 41 (EXPRESSION_LIST)
